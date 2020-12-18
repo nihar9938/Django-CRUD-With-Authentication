@@ -72,3 +72,6 @@
 ```
 #### Employee Delete:
   Api:`http://127.0.0.1:8000/api/{Eid}`
+  
+## Testing With Swagger:
+url:`http://127.0.0.1:8000/docs/`
