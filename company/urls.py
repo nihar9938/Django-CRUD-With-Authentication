@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
+
 from accounts.views import *
+from employees.views import *
+
 from rest_framework_swagger.views import get_swagger_view
 schema_view=get_swagger_view(title="Api Testing Using Swagger")
+
+from rest_framework import routers
+router=routers.DefaultRouter()
+router.register('api',EmployeeCRUD)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +33,6 @@ urlpatterns = [
     path('api/token/',TokenObtainPairView.as_view(),name='token_obtain_pair'),
     path('api/token/refresh/',TokenRefreshView.as_view(),name='token_refresh'),
     path('api/signup',Signup.as_view()),
-    path('api/employees/',include('employees.urls')),
-    path('',schema_view)
+    path('',include(router.urls)),
+    path('docs/',schema_view)
 ]
